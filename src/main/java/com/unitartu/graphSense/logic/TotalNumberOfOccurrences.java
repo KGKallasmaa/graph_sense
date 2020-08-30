@@ -4,24 +4,17 @@ import com.unitartu.graphSense.entity.EventOccurrence;
 import com.unitartu.graphSense.entity.GraphData;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class TotalNumberOfOccurrences {
     // TODO: implement streams
     public HashMap<EventOccurrence,Integer> calculateTotalNumberOfOccurrences(List<GraphData> dataFromFile){
+        Map<String,List<String>> id_events = dataFromFile.stream()
+                .filter(e->e.getId() != null && e.getName() != null)
+                .collect(Collectors.groupingBy(GraphData::getId))
+                .entrySet().stream()
+                .collect(Collectors.toMap(Map.Entry::getKey, x->x.getValue().stream().map(GraphData::getName).collect(Collectors.toList())));
 
-        HashMap<String,List<String>> id_events = new HashMap<>();
-
-        for(GraphData g :dataFromFile){
-            String startEventName = g.getName();
-            String id = g.getId();
-
-            List<String> currentValue  = new ArrayList<>();
-            if (id_events.containsKey(id)){
-                currentValue = id_events.get(id);
-            }
-            currentValue.add(startEventName);
-            id_events.put(id,currentValue);
-        }
 
         HashMap<EventOccurrence,Integer> occurringEvent_Count = new HashMap<>();
 
