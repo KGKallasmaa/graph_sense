@@ -1,4 +1,4 @@
-package com.unitartu.graphSence.entity;
+package com.unitartu.graphSense.entity;
 
 import lombok.Getter;
 import lombok.Setter;

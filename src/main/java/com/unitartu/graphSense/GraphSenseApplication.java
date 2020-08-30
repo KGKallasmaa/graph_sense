@@ -1,14 +1,14 @@
-package com.unitartu.graphSence;
+package com.unitartu.graphSense;
 
-import com.unitartu.graphSence.entity.GraphData;
-import com.unitartu.graphSence.logic.MyFileReader;
+import com.unitartu.graphSense.entity.GraphData;
+import com.unitartu.graphSense.logic.MyFileReader;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.util.List;
 
 @SpringBootApplication
-public class GraphSenceApplication {
-	final static String fileName = "src/main/java/com/unitartu/graphSence/data/inital_file.csv";
+public class GraphSenseApplication {
+	final static String fileName = "src/main/java/com/unitartu/graphSense/data/initial_file.csv";
 
 	public static void main(String[] args) {
 		MyFileReader fileReader = new MyFileReader();

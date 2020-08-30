@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.unitartu</groupId>
-	<artifactId>graphSence</artifactId>
+	<artifactId>graphSense</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>graphSence</name>
+	<name>graphSense</name>
 	<description>A project for transforming csv to hashmap</description>
 
 	<properties>

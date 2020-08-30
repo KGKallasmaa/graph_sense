@@ -1,6 +1,6 @@
-package com.unitartu.graphSence.logic;
+package com.unitartu.graphSense.logic;
 
-import com.unitartu.graphSence.entity.GraphData;
+import com.unitartu.graphSense.entity.GraphData;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
