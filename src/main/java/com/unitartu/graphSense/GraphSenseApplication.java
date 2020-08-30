@@ -1,9 +1,12 @@
 package com.unitartu.graphSense;
 
+import com.unitartu.graphSense.entity.EventOccurrence;
 import com.unitartu.graphSense.entity.GraphData;
 import com.unitartu.graphSense.logic.MyFileReader;
+import com.unitartu.graphSense.logic.TotalNumberOfOccurrences;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.util.HashMap;
 import java.util.List;
 
 @SpringBootApplication
@@ -13,10 +16,14 @@ public class GraphSenseApplication {
 	public static void main(String[] args) {
 		MyFileReader fileReader = new MyFileReader();
 		List<GraphData> dataFromFile = fileReader.readFile(fileName);
-		for (GraphData result : dataFromFile) {
-			System.out.println(result);
-		}
-	//	SpringApplication.run(GraphSenceApplication.class, args);
-	}
 
+		// Statistic 1: total nr of occurrences
+
+		TotalNumberOfOccurrences totalNumberOfOccurrences = new TotalNumberOfOccurrences();
+		HashMap<EventOccurrence,Integer>  occurrences = totalNumberOfOccurrences.calculateTotalNumberOfOccurrences(dataFromFile);
+
+		for(EventOccurrence key : occurrences.keySet()){
+			System.out.println("key:"+key.toString()+" count:"+occurrences.get(key));
+		}
+	}
 }
