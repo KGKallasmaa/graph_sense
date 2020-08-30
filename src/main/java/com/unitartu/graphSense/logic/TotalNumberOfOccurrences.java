@@ -7,17 +7,20 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class TotalNumberOfOccurrences {
-    // TODO: implement streams
+
     public HashMap<EventOccurrence,Integer> calculateTotalNumberOfOccurrences(List<GraphData> dataFromFile){
         Map<String,List<String>> id_events = dataFromFile.stream()
                 .filter(e->e.getId() != null && e.getName() != null)
                 .collect(Collectors.groupingBy(GraphData::getId))
                 .entrySet().stream()
-                .collect(Collectors.toMap(Map.Entry::getKey, x->x.getValue().stream().map(GraphData::getName).collect(Collectors.toList())));
+                .collect(Collectors.toMap(
+                        Map.Entry::getKey,
+                        x->x.getValue().stream().map(GraphData::getName).collect(Collectors.toList()))
+                );
 
 
+        // TODO: implement streams
         HashMap<EventOccurrence,Integer> occurringEvent_Count = new HashMap<>();
-
         for (Map.Entry<String, List<String>> entry : id_events.entrySet()) {
             List<String> sequentialEvents = entry.getValue();
             for (int i = 0; i < sequentialEvents.size()-1; i++) {
