@@ -1,27 +1,31 @@
 package com.unitartu.graphSense.entity;
 
-import lombok.Getter;
-import lombok.Setter;
+
+
+import lombok.ToString;
 
 import java.util.List;
 
-@Getter
-@Setter
+
+@ToString
 public class GraphData {
     private final String id;
     private final String name;
-    private final List<String> args;
 
     private GraphData(GraphDataBuilder builder) {
         this.id = builder.id;
         this.name = builder.name;
-        this.args = builder.args;
+        List<String> args = builder.args;
     }
 
-    @Override
-    public String toString() {
-        return "Id: "+this.id+", Name:"+this.name+", Args:"+this.args;
+    public String getId() {
+        return id;
     }
+
+    public String getName() {
+        return name;
+    }
+
 
     public static class GraphDataBuilder
     {
@@ -45,10 +49,10 @@ public class GraphData {
         }
         private void validateGraphDataObject(GraphData graphData) {
             if (graphData.id.isEmpty()){
-                throw new Error("Graphdata id can't be empty");
+                throw new Error("GraphData id can't be empty");
             }
             if (graphData.name.isEmpty()){
-                throw new Error("Graphdata name can't be empty");
+                throw new Error("GraphData name can't be empty");
             }
         }
     }
