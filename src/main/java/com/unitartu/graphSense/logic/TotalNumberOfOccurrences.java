@@ -14,8 +14,8 @@ import java.util.stream.Collectors;
 public class TotalNumberOfOccurrences {
 
 
-    public HashMap<EventOccurrence, Integer> calculateTotalNumberOfOccurrences(List<GraphData> dataFromFile) {
-        Map<String, List<GraphData>> id_events = dataFromFile.stream()
+    public Map<EventOccurrence, Integer> calculateTotalNumberOfOccurrences(List<GraphData> dataFromFile) {
+        Map<String, List<GraphData>> id_events = dataFromFile.parallelStream()
                 .filter(e -> e.getId() != null && e.getName() != null)
                 .collect(Collectors.groupingBy(GraphData::getId));
 
@@ -33,11 +33,7 @@ public class TotalNumberOfOccurrences {
                 if (bothEventsHaveCompleteAndFirstEventWasBeforeSecond) {
                     EventOccurrence eventOccurrence = new EventOccurrence.EventOccurrenceBuilder(event1.getName(), event2.getName()).build();
 
-                    Integer newCount = 1;
-                    if (occurringEventCount.containsKey(eventOccurrence)) {
-                        Integer extraCount = occurringEventCount.get(eventOccurrence);
-                        newCount += extraCount;
-                    }
+                    Integer newCount = occurringEventCount.containsKey(eventOccurrence) ? occurringEventCount.get(eventOccurrence) +1 : 1;
                     occurringEventCount.put(eventOccurrence, newCount);
                 }
             }

@@ -1,7 +1,6 @@
 package com.unitartu.graphSense.entity;
 
 
-
 import lombok.Getter;
 import lombok.ToString;
 
@@ -28,50 +27,52 @@ public class GraphData {
     }
 
 
-    public boolean hasAnArgument(String argument){
+    public boolean hasAnArgument(String argument) {
         return args.contains(argument);
     }
-    public String getArgumentValue(String argument){
-       int argumentIndex = this.args.indexOf(argument);
-       return this.args.get(argumentIndex+1);
+
+    public String getArgumentValue(String argument) {
+        return this.args.get(this.args.indexOf(argument) + 1);
     }
-    public boolean thisEventWasBefore(GraphData o){
+
+    public boolean thisEventWasBefore(GraphData o) {
         try {
             Date completionTime1 = formatter.parse(this.getArgumentValue("complete"));
             Date completionTime2 = formatter.parse(o.getArgumentValue("complete"));
             return completionTime1.before(completionTime2);
         } catch (ParseException e) {
-            System.out.println("Error: Coun't parse: "+o.getArgumentValue("complete"));
+            System.out.println("Error: Coun't parse: " + o.getArgumentValue("complete"));
         }
         return false;
     }
 
 
-    public static class GraphDataBuilder
-    {
+    public static class GraphDataBuilder {
         private final String id;
         private final String name;
         private List<String> args;
 
-        public GraphDataBuilder(String id,String name) {
+        public GraphDataBuilder(String id, String name) {
             this.id = id;
             this.name = name;
         }
+
         public GraphDataBuilder withArgs(List<String> args) {
             this.args = args;
             return this;
         }
 
         public GraphData build() {
-            GraphData graphData =  new GraphData(this);
+            GraphData graphData = new GraphData(this);
             validateGraphDataObject(graphData);
             return graphData;
         }
+
         private void validateGraphDataObject(GraphData graphData) {
-            if (graphData.id.isEmpty()){
+            if (graphData.id.isEmpty()) {
                 throw new Error("GraphData id can't be empty");
             }
-            if (graphData.name.isEmpty()){
+            if (graphData.name.isEmpty()) {
                 throw new Error("GraphData name can't be empty");
             }
         }

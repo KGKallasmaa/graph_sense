@@ -16,12 +16,11 @@ public class EventOccurrence {
         this.endEventName = builder.endEventName;
     }
 
-    public static class EventOccurrenceBuilder
-    {
+    public static class EventOccurrenceBuilder {
         private final String startEventName;
         private final String endEventName;
 
-        public EventOccurrenceBuilder(String startEventName,String endEventName) {
+        public EventOccurrenceBuilder(String startEventName, String endEventName) {
             this.startEventName = startEventName;
             this.endEventName = endEventName;
         }

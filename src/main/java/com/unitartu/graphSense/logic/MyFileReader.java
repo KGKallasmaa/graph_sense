@@ -12,7 +12,7 @@ import java.util.List;
 public class MyFileReader {
     //TODO: we should convert csv to parquet
 
-    public List<GraphData> readFile(String fileName){
+    public List<GraphData> readFile(String fileName) {
         List<List<String>> rawRecords = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
             String line;
