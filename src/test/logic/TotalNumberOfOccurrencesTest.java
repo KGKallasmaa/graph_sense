@@ -35,7 +35,7 @@ class TotalNumberOfOccurrencesTest {
         List<GraphData> dataFromFiles = Arrays.asList(graphObj1,graphObj2,graphObj3,graphObj4);
 
         TotalNumberOfOccurrences totalNumberOfOccurrences = new TotalNumberOfOccurrences();
-        HashMap<EventOccurrence,Integer> results = totalNumberOfOccurrences.calculateTotalNumberOfOccurrences(dataFromFiles);
+        Map<EventOccurrence,Integer> results = totalNumberOfOccurrences.calculateTotalNumberOfOccurrences(dataFromFiles);
 
         assertEquals(2,results.keySet().size());
 
@@ -80,7 +80,7 @@ class TotalNumberOfOccurrencesTest {
         List<GraphData> dataFromFiles = Arrays.asList(graphObj1,graphObj2,graphObj3,graphObj4,graphObj5, graphObj6);
 
         TotalNumberOfOccurrences totalNumberOfOccurrences = new TotalNumberOfOccurrences();
-        HashMap<EventOccurrence,Integer> results = totalNumberOfOccurrences.calculateTotalNumberOfOccurrences(dataFromFiles);
+        Map<EventOccurrence,Integer> results = totalNumberOfOccurrences.calculateTotalNumberOfOccurrences(dataFromFiles);
 
 
         assertEquals(3,results.keySet().size());

@@ -22,7 +22,7 @@ public class MaxMinPerCase {
             for (int i = 1; i < events.size() - 1; i++) {
                 GraphData event1 = events.get(i - 1);
                 GraphData event2 = events.get(i);
-                boolean bothEventsHaveCompleteAndFirstEventWasBeforeSecond = event1.hasAnArgument("complete") && event2.hasAnArgument("complete") && event1.thisEventWasBefore(event2);
+                boolean bothEventsHaveCompleteAndFirstEventWasBeforeSecond = event1.hasAnArgument("complete") && event2.hasAnArgument("complete") && event1.thisEventWasBefore(event2,events);
                 if (bothEventsHaveCompleteAndFirstEventWasBeforeSecond) {
                     EventOccurrence eventOccurrence = new EventOccurrence.EventOccurrenceBuilder(event1.getName(), event2.getName()).build();
 

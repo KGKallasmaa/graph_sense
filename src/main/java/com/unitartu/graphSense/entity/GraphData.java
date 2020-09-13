@@ -9,6 +9,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @ToString
@@ -35,13 +36,34 @@ public class GraphData {
         return this.args.get(this.args.indexOf(argument) + 1);
     }
 
-    public boolean thisEventWasBefore(GraphData o) {
+    public boolean thisEventWasBefore(GraphData o, List<GraphData> allOtherEventsWithSameEventId) {
         try {
             Date completionTime1 = formatter.parse(this.getArgumentValue("complete"));
             Date completionTime2 = formatter.parse(o.getArgumentValue("complete"));
-            return completionTime1.before(completionTime2);
+
+            if (completionTime2.after(completionTime1)) {
+                return false;
+            }
+
+            List<GraphData> otherEventsInBetween = allOtherEventsWithSameEventId.stream()
+                    .filter(event -> !event.getName().equals(this.getName()) && !event.getName().equals(o.getName()))
+                    .filter(event -> event.hasAnArgument("complete"))
+                    .collect(Collectors.toList());
+
+
+            for (GraphData event : otherEventsInBetween) {
+                Date completionTime = formatter.parse(event.getArgumentValue("complete"));
+                boolean thisTimeIsAfterOrEqualToFirstEvent = completionTime.after(completionTime1) | completionTime.after(completionTime1);
+                boolean thisTimesIsBeforeOrEqualToFirstEvent = completionTime.before(completionTime2) | completionTime.equals(completionTime2);
+
+                if (thisTimeIsAfterOrEqualToFirstEvent && thisTimesIsBeforeOrEqualToFirstEvent) {
+                    return false;
+                }
+            }
+            return true;
+
         } catch (ParseException e) {
-            System.out.println("Error: Coun't parse: " + o.getArgumentValue("complete"));
+            System.out.println("Error: Couldn't parse: " + o.getArgumentValue("complete"));
         }
         return false;
     }
