@@ -1,11 +1,12 @@
 package com.unitartu.graphSense.entity;
 
 
+import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-import java.util.Objects;
 
 @ToString
+@EqualsAndHashCode
 public class EventOccurrence {
     private final String startEventName;
     private final String endEventName;
@@ -15,38 +16,17 @@ public class EventOccurrence {
         this.endEventName = builder.endEventName;
     }
 
-    public static class EventOccurrenceBuilder
-    {
+    public static class EventOccurrenceBuilder {
         private final String startEventName;
         private final String endEventName;
 
-        public EventOccurrenceBuilder(String startEventName,String endEventName) {
+        public EventOccurrenceBuilder(String startEventName, String endEventName) {
             this.startEventName = startEventName;
             this.endEventName = endEventName;
         }
 
         public EventOccurrence build() {
-            EventOccurrence eventOccurrence =  new EventOccurrence(this);
-            return eventOccurrence;
+            return new EventOccurrence(this);
         }
-    }
-
-
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o)
-            return true;
-        if (o == null)
-            return false;
-        if (getClass() != o.getClass())
-            return false;
-        EventOccurrence otherEventOccurrence = (EventOccurrence) o;
-        return Objects.equals(this.startEventName, otherEventOccurrence.startEventName)
-                && Objects.equals(this.endEventName, otherEventOccurrence.endEventName);
-    }
-    @Override
-    public int hashCode() {
-        return startEventName.hashCode() * endEventName.hashCode();
     }
 }
