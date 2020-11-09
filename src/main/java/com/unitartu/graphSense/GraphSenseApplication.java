@@ -1,62 +1,53 @@
 package com.unitartu.graphSense;
 
-import com.unitartu.graphSense.entity.EventOccurrence;
-import com.unitartu.graphSense.entity.GraphData;
-import com.unitartu.graphSense.logic.MaxMinPerCase;
+
+import com.unitartu.graphSense.config.SparkConfig;
 import com.unitartu.graphSense.logic.MyFileReader;
-import com.unitartu.graphSense.logic.NumberOfDistinctCases;
-import com.unitartu.graphSense.util.MapUtil;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.apache.spark.sql.SparkSession;
 
-import java.util.List;
-import java.util.Map;
 
-@SpringBootApplication
 public class GraphSenseApplication {
-    final static String fileName = "src/main/java/com/unitartu/graphSense/data/initial_file.csv";
-
-    public static void main(String[] args) throws Exception {
-        MyFileReader fileReader = new MyFileReader();
-        List<GraphData> dataFromFile = fileReader.readFile(fileName);
-        MapUtil mapUtil = new MapUtil();
-
-        // Statistic 1: total nr of occurrences
-/*
-
-		TotalNumberOfOccurrences totalNumberOfOccurrences = new TotalNumberOfOccurrences();
-		Map<EventOccurrence,Integer>  occurrences = totalNumberOfOccurrences.calculateTotalNumberOfOccurrences(dataFromFile);
-		occurrences =  mapUtil.sortByValue(occurrences);
-
-		for(EventOccurrence key : occurrences.keySet()){
-			System.out.println("key:"+key.toString()+" count:"+occurrences.get(key));
-		}
-
-		 */
+    final static String fileName = "/Users/Gustav/Documents/GitHub/graph_sense/src/main/resources/initial_file.csv";
+    final static SparkConfig sparkConfig = new SparkConfig();
+    final static MyFileReader fileReader = new MyFileReader();
+    final static String sparkMaster = "spark://localhost:7077";
 
 
-        // Statistic 2: number of distinct cases
+    public static void main(String[] args) {
+        System.setProperty("hadoop.home.dir", "/");
+        /*
+        SparkConf conf = new SparkConf()
+                .setAppName("Graph sense app")
+                .setMaster("local[*]");
 
-/*
-        NumberOfDistinctCases numberOfDistinctCases = new NumberOfDistinctCases();
-        Map<EventOccurrence, Integer> occurrences = numberOfDistinctCases.calculateNumberOfDistinctCases(dataFromFile);
-        occurrences = mapUtil.sortByValue(occurrences);
+        JavaSparkContext sparkContext = new JavaSparkContext(conf);
 
-        for (EventOccurrence key : occurrences.keySet()) {
-            System.out.println("key:" + key.toString() + " count:" + occurrences.get(key));
-        }
+        final JavaRDD<GraphData> dataFromFile = fileReader.readFileForSpark(sparkConfig.sc(),fileName);
 
+        TotalNumberOfOccurrences service = new TotalNumberOfOccurrences();
+        var result = service.SparkCalculateTotalNumberOfOccurrences(sparkContext,dataFromFile);
+
+        System.out.println(result);
  */
 
-        // Statistic 3,4: max/min occurrences per case
-        MaxMinPerCase maxMinPerCase = new MaxMinPerCase();
-        Map<EventOccurrence,Integer>  occurrences = maxMinPerCase.calculateNumberOfTimesPerCase("min",dataFromFile);
-        occurrences =  mapUtil.sortByValue(occurrences);
 
-        for(EventOccurrence key : occurrences.keySet()){
-            System.out.println("key:"+key.toString()+" count:"+occurrences.get(key));
-        }
+        SparkSession sparkSession = new SparkSession.Builder()
+                .appName("Graph Sense cluster")
+                .master(sparkMaster)
+                .getOrCreate();
+
+
+        //     Dataset<Row> data = new MySpark().readFile(sparkSession, fileName);
+        sparkSession.stop();
+
 
         /*
+
+        MaxMinPerCase maxMinPerCase = new MaxMinPerCase();
+        maxMinPerCase.calculateNumberOfTimesPerCase(data);
+
          */
+
+
     }
 }

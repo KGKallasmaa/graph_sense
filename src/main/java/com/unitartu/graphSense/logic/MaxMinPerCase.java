@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 
 
 public class MaxMinPerCase {
+    /*
     public Map<EventOccurrence, Integer> calculateNumberOfTimesPerCase(String mode, List<GraphData> dataFromFile) {
 
         Map<String, List<GraphData>> id_events = dataFromFile.parallelStream()
@@ -59,4 +60,5 @@ public class MaxMinPerCase {
         }
         return occurringEvent_Count;
     }
+     */
 }

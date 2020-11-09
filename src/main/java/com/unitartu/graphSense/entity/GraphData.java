@@ -19,7 +19,7 @@ public class GraphData {
     private final String name;
     private final List<String> args;
 
-    DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
+    DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 
     private GraphData(GraphDataBuilder builder) {
         this.id = builder.id;

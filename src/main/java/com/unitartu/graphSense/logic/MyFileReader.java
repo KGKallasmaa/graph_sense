@@ -1,6 +1,7 @@
 package com.unitartu.graphSense.logic;
 
 import com.unitartu.graphSense.entity.GraphData;
+import org.apache.spark.api.java.JavaRDD;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -8,6 +9,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import org.apache.spark.api.java.JavaSparkContext;
+
 
 public class MyFileReader {
     //TODO: we should convert csv to parquet
@@ -39,5 +42,17 @@ public class MyFileReader {
             graphData.add(graphObj);
         }
         return graphData;
+    }
+
+    public JavaRDD<GraphData> readFileForSpark(JavaSparkContext sparkcontext, String fileName) {
+
+        JavaRDD<String> input = sparkcontext.textFile(fileName);
+        JavaRDD<String[]> parts = input.map(e->e.split(","));
+        return parts.map(array->
+                        new GraphData.GraphDataBuilder(array[0], array[1])
+                                .withArgs(Arrays.asList(Arrays.copyOfRange(array,2,array.length-1)))
+                                .build()
+                );
+
     }
 }

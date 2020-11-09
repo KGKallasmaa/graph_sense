@@ -10,7 +10,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class NumberOfDistinctCases {
-
+/*
     public Map<EventOccurrence, Integer> calculateNumberOfDistinctCases(List<GraphData> dataFromFile) {
         Map<String, List<GraphData>> id_events = dataFromFile.parallelStream()
                 .filter(e -> e.getId() != null && e.getName() != null)
@@ -38,4 +38,6 @@ public class NumberOfDistinctCases {
         return occurringEvent_Cases.entrySet().stream()
                 .collect(Collectors.toMap(Map.Entry::getKey, entry -> entry.getValue().size()));
     }
+
+ */
 }

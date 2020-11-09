@@ -1,0 +1,80 @@
+   final static String fileName = "src/main/java/com/unitartu/graphSense/data/initial_file.csv";
+     final static String sparkURL = "local[*]";
+
+ /*
+
+        System.out.println("hello");
+        System.setProperty("hadoop.home.dir", "/");
+
+
+
+        MyFileReader fileReader = new MyFileReader();
+        SparkConf conf = new SparkConf()
+                .setMaster(sparkURL)
+                .setAppName("GraphSence app");
+        JavaSparkContext sc = new JavaSparkContext(conf);
+
+
+        final JavaRDD<GraphData> dataFromFile = fileReader.readFileForSpark(sc,fileName);
+
+
+        JavaRDD<String> input = sc.textFile("/Users/Gustav/Documents/GitHub/graph_sense/src/main/java/com/unitartu/graphSense/numbers.txt");
+        JavaRDD<String> numberStrings = input.flatMap(s -> Arrays.asList(s.split(" ")).iterator());
+        JavaRDD<String> validNumberString = numberStrings.filter(string -> !string.isEmpty());
+        JavaRDD<Integer> numbers = validNumberString.map(Integer::valueOf);
+        int finalSum = numbers.reduce(Integer::sum);
+
+        System.out.println("Final sum is: " + finalSum);
+
+
+
+        sc.close();
+
+          */
+
+
+          /*
+          public static void main(String[] args) throws Exception {
+                  MyFileReader fileReader = new MyFileReader();
+                  List<GraphData> dataFromFile = fileReader.readFile(fileName);
+                  MapUtil mapUtil = new MapUtil();
+
+                  // Statistic 1: total nr of occurrences
+          /*
+
+          		TotalNumberOfOccurrences totalNumberOfOccurrences = new TotalNumberOfOccurrences();
+          		Map<EventOccurrence,Integer>  occurrences = totalNumberOfOccurrences.calculateTotalNumberOfOccurrences(dataFromFile);
+          		occurrences =  mapUtil.sortByValue(occurrences);
+
+          		for(EventOccurrence key : occurrences.keySet()){
+          			System.out.println("key:"+key.toString()+" count:"+occurrences.get(key));
+          		}
+
+          		 */
+
+
+              // Statistic 2: number of distinct cases
+
+          /*
+                  NumberOfDistinctCases numberOfDistinctCases = new NumberOfDistinctCases();
+                  Map<EventOccurrence, Integer> occurrences = numberOfDistinctCases.calculateNumberOfDistinctCases(dataFromFile);
+                  occurrences = mapUtil.sortByValue(occurrences);
+
+                  for (EventOccurrence key : occurrences.keySet()) {
+                      System.out.println("key:" + key.toString() + " count:" + occurrences.get(key));
+                  }
+
+
+
+              // Statistic 3,4: max/min occurrences per case
+              MaxMinPerCase maxMinPerCase = new MaxMinPerCase();
+              Map<EventOccurrence,Integer>  occurrences = maxMinPerCase.calculateNumberOfTimesPerCase("min",dataFromFile);
+                  occurrences =  mapUtil.sortByValue(occurrences);
+
+                          for(EventOccurrence key : occurrences.keySet()){
+                          System.out.println("key:"+key.toString()+" count:"+occurrences.get(key));
+                          }
+
+
+                          }
+                                  */
